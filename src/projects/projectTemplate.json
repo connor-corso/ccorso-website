@@ -1,0 +1,31 @@
+{
+    "project": {
+        "id":"",
+        "title": "",
+        "sections": 
+        [
+            {
+                "sectionTitle": "",
+                "sectionText": "",
+                "images":
+                [
+                    {
+                        "imageLocation": "",
+                        "imageAlternateText": "", 
+                        "imageWidth": ""
+                    }
+                ],
+
+                "links":
+                [
+                    {
+                        "linkText": "",
+                        "link": ""
+                    }
+
+
+                ]
+            }
+        ]
+    }
+}
