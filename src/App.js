@@ -12,7 +12,12 @@ import Project from './projects/Project'
 
 export default function App() {
   return (
-    <Project />
+    <Grid container spacing={5}>
+      <Container sx={{marginY: 5}}>
+        <Project />
+      </Container>
+
+    </Grid>
     
   );
 }
