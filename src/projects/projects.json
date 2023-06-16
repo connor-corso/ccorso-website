@@ -6,16 +6,8 @@
         "sections":
         [
             {
-                "sectionTitle": "main",
-                "sectionText": "Working with PWM and servo motors \nThis project has a servo motor connected to PB6, a switch connected to PA4 and a laser connected to pin PA2.\nThe device will read in the status of the pull up pin PA4 to see if the switch has been toggled, and then will start operation of the toy\nWhen the device is on, pin PA2 will be set and the laser turned on. Then the bigBounce method will be called, then the randomBounce method, and then the bigBounce method again before looping\nbigBounce takes no arguments and will first look at the value in the timer compare register to see where the servo is currently positioned, and then will start at the opposite end and slowly move across to the other side\nrandomBounce takes no arguments and will generate a random number between 0 and 14, and based on that number will call randomWobble with a different base position argument\nrandomWobble will take an base, an int and will then move in a quick back and forth motion around that base position",
-                "images":
-                [
-                    {
-                        "imageLocation": "",
-                        "imageAlternateText": "", 
-                        "imageWidth": ""
-                    }
-                ]
+                "title": "main",
+                "text": "Working with PWM and servo motors \nThis project has a servo motor connected to PB6, a switch connected to PA4 and a laser connected to pin PA2.\nThe device will read in the status of the pull up pin PA4 to see if the switch has been toggled, and then will start operation of the toy\nWhen the device is on, pin PA2 will be set and the laser turned on. Then the bigBounce method will be called, then the randomBounce method, and then the bigBounce method again before looping\nbigBounce takes no arguments and will first look at the value in the timer compare register to see where the servo is currently positioned, and then will start at the opposite end and slowly move across to the other side\nrandomBounce takes no arguments and will generate a random number between 0 and 14, and based on that number will call randomWobble with a different base position argument\nrandomWobble will take an base, an int and will then move in a quick back and forth motion around that base position"
             }
         ]
         
@@ -28,16 +20,8 @@
         "sections":
         [
             {
-                "sectionTitle": "Main",
-                "sectionText": "This is a WIP, much like my website",
-                "images":
-                [
-                    {
-                        "imageLocation": "",
-                        "imageAlternateText": "", 
-                        "imageWidth": ""
-                    }
-                ]
+                "title": "Main",
+                "text": "This is a WIP, much like my website"
             }
         ]
     },
@@ -47,63 +31,59 @@
         "sections": 
         [
             {
-                "sectionTitle": "Introduction",
-                "sectionText": "After graduating Trent with a CS degree I have been slowly poking away at my website trying to polish it up. Originally I had a little site written up in PHP with some basic CSS styling however I got bored pretty quickly and gave up. This write up talks about my experience redoing my website with React using Material UI to make it nice and pretty",
+                "title": "Introduction",
+                "text": "After graduating Trent with a CS degree I have been slowly poking away at my website trying to polish it up. Originally I had a little site written up in PHP with some basic CSS styling however I got bored pretty quickly and gave up. This write up talks about my experience redoing my website with React using Material UI to make it nice and pretty",
                 "images":
                 [
                     {
-                        "imageLocation": "images/pukegreen.png",
-                        "imageAlternateText": "picture of my old gross website", 
-                        "imageWidth": "300"
+                        "imageLocation": "screenshot_old_puke_green_website.png",
+                        "imageAlternateText": "picture of my old gross website",
+                        "imageWidth": "400"
+                    }
+                ]
+            },
+            {
+                "title": "End Goal",
+                "text": "I would like my website to have four pages, a home page, a projects page, a selfhosted services page, and a guide page for selfhosting services. The home page could have a preamble talking about me and then I would like to have it have a sample of each subpage displayed on it. I am going to start with the projects page as that is the page that I have the most content for and that I think will allow me to show what I have been working on. Then I will implement a home page that has the projects page displayed on it multiple times that will be slowly replaced when I finish the selfhosted services and guide pages complete."
+            },
+            {
+                "title": "Implementation Details",
+                "text": "Currently the projects page will get all of its data from a json file that contains an array of projects. Each project will have multiple sections in it that contain a section title, section text and then an  array of images that contains the image location as well as alternate text and image width properties"
+            },
+            {
+                "title": "Key Lessons Learned",
+                "text": "I don't have any key lessons learned as of yet because I'm still working on it in the early stages"
+
+            }
+        ]
+    },
+    {
+        "id":"4",
+        "title": "Working With Google Motion Photos",
+        "sections": 
+        [
+            {
+                "title": "Introduction",
+                "text": "Google Camera (aka Gcam) has a toggle for \"Top Shot\" which allows you to take Motion Photos (MPs). Motion photos are pictures that also contain a short video from before you take the picture. Normally these videos are only accessible when you use Google Photos, however if Google has a way of extracting these images then there must be some way for other applications to access these videos. With this project I plan on first building a basic web app that takes a motion photo upload and splits it into both the regular image and the video."
+            },
+            {
+                "title": "How To Extract the file offsets",
+                "text": "I have been playing around with figuring out how to work with MPs ever since I ran out of free storage and started to migrate all of my data to a self hosted Google Photos alternative, photoprism. Once I realized that photoprism did not have support for MPs I tried looking around for another selfhosted solution that would support the feature. I could not find a solution so I decided to look into how to extract the videos myself and I first built a bash script ",
+                "images":
+                [
+                    {
+                        "imageLocation": "screenshot_of_gmp_sizes.png",
+                        "imageAlternateText": "A screenshot showing the fields embedded within the google motion photo", 
+                        "imageWidth": ""
                     }
                 ],
-
                 "links":
                 [
                     {
-                        "linkText": "",
-                        "link": ""
-                    }
-                        
-
-                ]
-            },
-            {
-                "sectionTitle": "End Goal",
-                "sectionText": "I would like my website to have four pages, a home page, a projects page, a selfhosted services page, and a guide page for selfhosting services. The home page could have a preamble talking about me and then I would like to have it have a sample of each subpage displayed on it. I am going to start with the projects page as that is the page that I have the most content for and that I think will allow me to show what I have been working on. Then I will implement a home page that has the projects page displayed on it multiple times that will be slowly replaced when I finish the selfhosted services and guide pages complete.",
-                "images":
-                [
-                    {
-                        "imageLocation": "",
-                        "imageAlternateText": "", 
-                        "imageWidth": ""
+                        "linkText": "link to basic shell script",
+                        "link": "https://droppy.ccorso.ca/$/Yj2Yc"
                     }
                 ]
-            },
-            {
-                "sectionTitle": "Implementation Details",
-                "sectionText": "Currently the projects page will get all of its data from a json file that contains an array of projects. Each project will have multiple sections in it that contain a section title, section text and then an  array of images that contains the image location as well as alternate text and image width properties",
-                "images":
-                [
-                    {
-                        "imageLocation": "",
-                        "imageAlternateText": "", 
-                        "imageWidth": ""
-                    }
-                ]
-            },
-            {
-                "sectionTitle": "Key Lessons Learned",
-                "sectionText": "I don't have any key lessons learned as of yet because I'm still working on it in the early stages",
-                "images":
-                [
-                    {
-                        "imageLocation": "",
-                        "imageAlternateText": "", 
-                        "imageWidth": ""
-                    }
-                ]
-
             }
         ]
     }
