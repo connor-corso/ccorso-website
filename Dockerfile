@@ -3,15 +3,15 @@
 #Stage 1
 FROM node:20-alpine as builder
 WORKDIR /app
-COPY package.json .
-COPY package-lock.json .
-RUN npm install
-COPY . .
-RUN yarn build
+COPY package.json ./
+COPY package-lock.json ./
+RUN npm ci --silent 
+RUN npm install -g --silent
+COPY . ./
+RUN npm run build
 
 #Stage 2
-FROM nginx:1.19.0
-WORKDIR /usr/share/nginx/html
-RUN rm -rf./*
-COPY --from=builder /app/build .
+FROM nginx:stable-alpine
+COPY --from=builder /app/build /usr/share/nginx/html
+
 ENTRYPOINT ["nginx", "-g", "daemon off;"]
