@@ -33,7 +33,8 @@ function ProjectLinks({links}){
   return (
     <Box pb={2}>
       <Link href={links[0].link}
-        pb={2}>
+        pb={2}
+        rel="noreferrer">
         {links[0].linkText}
       </Link>
     </Box>

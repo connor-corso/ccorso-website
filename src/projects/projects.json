@@ -68,7 +68,7 @@
             },
             {
                 "title": "How To Extract the file offsets",
-                "text": "I have been playing around with figuring out how to work with MPs ever since I ran out of free storage and started to migrate all of my data to a self hosted Google Photos alternative, photoprism. Once I realized that photoprism did not have support for MPs I tried looking around for another selfhosted solution that would support the feature. I could not find a solution so I decided to look into how to extract the videos myself and I first built a bash script ",
+                "text": "I have been playing around with figuring out how to work with MPs ever since I ran out of free storage and started to migrate all of my data to a self hosted Google Photos alternative, photoprism. Once I realized that photoprism did not have support for MPs I tried looking around for another selfhosted solution that would support the feature. I could not find a solution so I decided to look into how to extract the videos myself and I first built a bash script as a proof of concept. The script can be found at the link below. It works by taking the name of the photo as an argument and it will then use grep to look at the text data within the picture and it extracts the second length field. This field tells you how long the image is in bytes, and is used with dd to extract all of the bytes after that length and store them in a .mp4 container.",
                 "images":
                 [
                     {
@@ -84,7 +84,19 @@
                         "link": "https://droppy.ccorso.ca/$/Yj2Yc"
                     }
                 ]
+            },
+            {
+                "title": "How To Do This In A Web App?",
+                "text": "I plan on having a Python backend that uses fastAPI to expose a service that will take a motion photo and it will return the photo after the video has been removed, as well as the video itself.",
+                "links":
+                [
+                    {
+                        "linkText": "link to the backend github repo",
+                        "link": "https://github.com/connor-corso/motion-photos-extraction-backend"
+                    }
+                ]
             }
+
         ]
     }
 ]
