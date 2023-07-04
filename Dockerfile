@@ -11,7 +11,9 @@ COPY . ./
 RUN npm run build
 
 #Stage 2
-FROM nginx:stable-alpine
+FROM nginx:stable
+COPY ./default.conf /etc/nginx/conf.d/default.conf
 COPY --from=builder /app/build /usr/share/nginx/html
+
 
 ENTRYPOINT ["nginx", "-g", "daemon off;"]
