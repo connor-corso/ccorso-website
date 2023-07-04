@@ -1,23 +1,54 @@
 import * as React from 'react';
 import Container from '@mui/material/Container';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
-import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
-import Paper from '@mui/material/Paper';
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Link
+} from "react-router-dom";
 
-import Project from './projects/Project'
-
+import Project from './projects/Project';
 
 
 export default function App() {
   return (
-    <Grid container spacing={5}>
-      <Container sx={{marginY: 5}}>
-        <Project />
-      </Container>
-
-    </Grid>
+    <Router>
+      <div>
+        <Navbar />
+        <Routes>
+          <Route path='/projects' element={<Project />}>
+            
+          </Route>
+          <Route path='/' element={<Home />}>
+            
+          </Route>
+        </Routes>
+      </div>
+    </Router>
+    
     
   );
+}
+
+function Home() {
+  return <h2>Home</h2>
+}
+
+function Navbar(){
+  return (
+    <nav>
+      <ul>
+        <li>
+          <Link to="/">Home</Link>
+        </li>
+        <li>
+          <Link to="/about">About</Link>
+        </li>
+        <li>
+          <Link to="/users">Users</Link>
+        </li>
+      </ul>
+    </nav>
+  )
 }

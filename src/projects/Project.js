@@ -2,7 +2,7 @@ import Container from '@mui/material/Container';
 import Grid  from '@mui/material/Grid';
 
 import projects from './projects.json';
-import ProjectCard from "./ProjectCard";
+import ProjectCard from "components/cards/ProjectCard";
 
 
 function Project(){
