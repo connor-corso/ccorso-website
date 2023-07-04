@@ -5,6 +5,7 @@ import {
   BrowserRouter as Router,
   Route,
   Routes,
+  Navigate,
   Link
 } from "react-router-dom";
 
@@ -23,6 +24,9 @@ export default function App() {
           <Route path='/' element={<Home />}>
             
           </Route>
+
+          <Route path="*" element={<Navigate to="/" />} />
+
         </Routes>
       </div>
     </Router>
@@ -43,10 +47,7 @@ function Navbar(){
           <Link to="/">Home</Link>
         </li>
         <li>
-          <Link to="/about">About</Link>
-        </li>
-        <li>
-          <Link to="/users">Users</Link>
+          <Link to="/projects">Projects</Link>
         </li>
       </ul>
     </nav>
