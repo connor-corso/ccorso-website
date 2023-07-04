@@ -71,8 +71,7 @@ function ProjectCard({project}){
         pt={2}
         pb={2}>
         
-
-          {project.title} 
+        {project.title} 
         </Typography>
         {project.sections.map((section, index) => (
                 <ProjectSection section={section} key={index} />

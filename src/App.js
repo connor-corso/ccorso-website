@@ -9,7 +9,8 @@ import {
   Link
 } from "react-router-dom";
 
-import Project from './projects/Project';
+import Navbar from 'components/navbar/Navbar';
+import Project from 'projects/Project';
 
 
 export default function App() {
@@ -37,19 +38,4 @@ export default function App() {
 
 function Home() {
   return <h2>Home</h2>
-}
-
-function Navbar(){
-  return (
-    <nav>
-      <ul>
-        <li>
-          <Link to="/">Home</Link>
-        </li>
-        <li>
-          <Link to="/projects">Projects</Link>
-        </li>
-      </ul>
-    </nav>
-  )
 }
