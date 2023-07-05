@@ -11,6 +11,7 @@ import {
 
 import Navbar from 'components/navbar/Navbar';
 import Project from 'projects/Project';
+import SelfhostedServices from 'selfhostedServices/SelfhostedServices';
 
 
 export default function App() {
@@ -19,12 +20,12 @@ export default function App() {
       <div>
         <Navbar />
         <Routes>
-          <Route path='/projects' element={<Project />}>
             
-          </Route>
-          <Route path='/' element={<Home />}>
-            
-          </Route>
+          <Route path='/projects' element={<Project />} />
+        
+          <Route path='/' element={<Home />} />
+          
+          <Route path='/selfhosted' element={<SelfhostedServices />} />
 
           <Route path="*" element={<Navigate to="/" />} />
 
