@@ -48,7 +48,11 @@
             },
             {
                 "title": "Implementation Details",
-                "text": "Currently the projects page will get all of its data from a json file that contains an array of projects. Each project will have multiple sections in it that contain a section title, section text and then an  array of images that contains the image location as well as alternate text and image width properties"
+                "text": "Currently the projects page will get all of its data from a json file that contains an array of projects. Each project will have multiple sections in it that contain a section title, section text and then an  array of images that contains the image location as well as alternate text and image width properties. The website is in a GitHub repo and upon pushing changes GitHub Actions will automatically go out and build a container of the latest changes and push that container to Docker Hub. This updated container is picked up by Watchtower and the container is automatically updated on my server. This way all that I have to worry about is making the website and the deployment is taken care of automatically."
+            },
+            {
+                "title": "Problems Discovered Along The Way",
+                "text": "I wanted to keep my old website up while I worked on this new website, with the new website being accessible via www.ccorso.ca/projects and any other path going to the old website. This worked however the new website had nothing to serve at /projects and so it just returned an error. To get around this I made the website accessible at website.ccorso.ca and worked towards a proper solution using react-router-dom and setting a custom nginx.conf that had the line \"try_files $uri /index.html;\" in it that would default to /index.html whenever the path was not known to nginx."
             },
             {
                 "title": "Key Lessons Learned",

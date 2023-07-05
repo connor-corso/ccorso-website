@@ -1,6 +1,5 @@
 import * as React from 'react';
-import Container from '@mui/material/Container';
-import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
 import {
   BrowserRouter as Router,
   Route,
@@ -38,5 +37,8 @@ export default function App() {
 }
 
 function Home() {
-  return <h2>Home</h2>
+  return <Box>
+    <h2>Home</h2>
+    <p>Most of the content is on the projects or the selfhosted page</p>
+    </Box>
 }

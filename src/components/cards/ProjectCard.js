@@ -44,7 +44,7 @@ function ProjectLinks({links}){
 // This function takes a section (a json section) and spits out the section title, text, links and images
 function ProjectSection({section}){
   return (
-    <Box pl={5} >
+    <Box pl={5} pr={5}>
       <Typography variant="h6" component="h2" pb={1}>
         {section.title}
       </Typography>
@@ -68,8 +68,7 @@ function ProjectCard({project}){
         component="h2" 
         marginTop={5}
         ml={3}
-        pt={2}
-        pb={2}>
+        pt={2}>
         
         {project.title} 
         </Typography>

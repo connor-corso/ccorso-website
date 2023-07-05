@@ -1,0 +1,23 @@
+[
+    {
+        "title": "Website",
+        "link": "www.ccorso.ca",
+        "description": "my website",
+        "imageSource": ""
+    },
+    
+    {
+        "title": "Jellyfin",
+        "link": "jellyfin.ccorso.ca",
+        "description": "A self hosted netflix alternative",
+        "imageSource": "jellyfinicon.png"
+    },
+    
+    {
+        "title": "JellySeerr",
+        "link": "jellyseerr.ccorso.ca",
+        "description": "Users can request content to add to jellyfin",
+        "imageSource": "jellyseerricon.png"
+    }
+
+]

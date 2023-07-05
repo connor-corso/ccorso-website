@@ -1,10 +1,14 @@
 [
     {
-        "title":"projects",
+        "title":"Home",
+        "url":"/"
+    },
+    {
+        "title":"Projects",
         "url":"projects"
     },
     {
-        "title":"testing",
-        "url":"projects"
+        "title":"Selfhosted Services",
+        "url":"selfhosted"
     }
 ]
