@@ -1,0 +1,9 @@
+<!-- Icon for the motion photos splitting utility -->
+<svg width="160" height="110" >
+  <!--   w=46 h=71-->
+  <polyline points="4 79, 44 39, 74 89, 124 69, 154 89" style="fill:none; stroke:green; stroke-width:4; stroke-linejoin:round"/>
+  <circle r="10" cx="24" cy="29" style="fill:none; stroke:orange; stroke-width:4" />
+  <polyline points="" style="fill:none; stroke:black; stroke-width:4; stroke-linejoin:round"/>
+  <polygon points="84 59, 84 29, 104 44" style="fill:none; stroke:blue; stroke-width:4; stroke-linejoin:round"/>
+  <rect width="150" height="100" x="4" y="4" rx="10" style="fill:none; stroke:black; stroke-width:5"/>
+</svg>

@@ -3,19 +3,19 @@ import Toolbar from '@mui/material/Toolbar';
 import Box from '@mui/material/Box';
 import CardMedia from  '@mui/material/CardMedia';
 import section from 'data/sections.json';
-import websitebanner from 'images/website_banner.png'
 
+
+// The Navbar will have a banner
 function Navbar(){
     return (
         <Box>
-            <Toolbar>
-                <CardMedia
-                    component="img"
-                    sx={{ display: {xs: 'none', sm: 'block'} }}
-                    image={websitebanner}
-                    alt=""
-                />
-            </Toolbar>
+            
+            <CardMedia //we need to put the cardmedia outside of a toolbar so that it covers the whole viewport
+                component="img" 
+                sx={{ display: {xs: 'none', sm: 'block'} }}
+                image ={process.env.PUBLIC_URL + '/images/website_banner.png'}
+                alt=""/>
+
             <Toolbar
                 component="nav"
                 variant="dense"

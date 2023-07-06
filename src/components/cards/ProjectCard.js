@@ -44,11 +44,11 @@ function ProjectLinks({links}){
 // This function takes a section (a json section) and spits out the section title, text, links and images
 function ProjectSection({section}){
   return (
-    <Box pl={5} pr={5}>
+    <Box pl={2}>
       <Typography variant="h6" component="h2" pb={1}>
         {section.title}
       </Typography>
-      <Typography variant="body" component="p" pb={2}>
+      <Typography variant="body" component="body" pb={2}>
         {section.text}
       </Typography>
       <ProjectLinks links={section.links}/>
@@ -59,24 +59,20 @@ function ProjectSection({section}){
 
 function ProjectCard({project}){
   
-  return (
-    <Box>
-    
-      <Paper elevation={5}>
-        <Typography 
-        variant="h4" 
-        component="h2" 
-        marginTop={5}
-        ml={3}
-        pt={2}>
-        
-        {project.title} 
-        </Typography>
-        {project.sections.map((section, index) => (
-                <ProjectSection section={section} key={index} />
-          ))}
+  return (    
+      <Paper elevation={5} >
+        <Box p={2}>
+          <Typography 
+          variant="h4" 
+          component="h2" >
+          {project.title} 
+          </Typography>
+
+          {project.sections.map((section, index) => (
+            <ProjectSection  section={section} key={index} />
+            ))}
+        </Box>
       </Paper>
-    </Box>
   )
 }
 

@@ -9,8 +9,9 @@ import {
 } from "react-router-dom";
 
 import Navbar from 'components/navbar/Navbar';
-import Project from 'projects/Project';
+import Projects from 'projects/Projects';
 import SelfhostedServices from 'selfhostedServices/SelfhostedServices';
+import Homepage from 'homepage/Homepage';
 
 
 export default function App() {
@@ -20,9 +21,9 @@ export default function App() {
         <Navbar />
         <Routes>
             
-          <Route path='/projects' element={<Project />} />
+          <Route path='/projects' element={<Projects />} />
         
-          <Route path='/' element={<Home />} />
+          <Route path='/' element={<Homepage />} />
           
           <Route path='/selfhosted' element={<SelfhostedServices />} />
 

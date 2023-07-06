@@ -38,7 +38,7 @@
                     {
                         "imageLocation": "screenshot_old_puke_green_website.png",
                         "imageAlternateText": "picture of my old gross website",
-                        "imageWidth": "400"
+                        "imageWidth": "30%"
                     }
                 ]
             },
@@ -78,7 +78,7 @@
                     {
                         "imageLocation": "screenshot_of_gmp_sizes.png",
                         "imageAlternateText": "A screenshot showing the fields embedded within the google motion photo", 
-                        "imageWidth": ""
+                        "imageWidth": "30%"
                     }
                 ],
                 "links":

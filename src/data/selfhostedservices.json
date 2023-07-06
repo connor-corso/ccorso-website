@@ -18,6 +18,41 @@
         "link": "jellyseerr.ccorso.ca",
         "description": "Users can request content to add to jellyfin",
         "imageSource": "jellyseerricon.png"
+    },
+    
+    {
+        "title": "Motion Photos Extractor",
+        "link": "mp.ccorso.ca",
+        "description": "A self made tool to extract the videos from Google Motion Photos",
+        "imageSource": "motionphotosextractoricon.png"
+    },
+    
+    {
+        "title": "Gotify",
+        "link": "gotify.ccorso.ca",
+        "description": "A notification service",
+        "imageSource": "gotifyicon.png"
+    },
+    
+    {
+        "title": "Navidrome",
+        "link": "navidrome.ccorso.ca",
+        "description": "A self hosted music streaming platform",
+        "imageSource": "navidromeicon.png"
+    },
+    
+    {
+        "title": "Droppy",
+        "link": "droppy.ccorso.ca",
+        "description": "A self hosted file sharing platform",
+        "imageSource": "droppyicon.png"
+    },
+    
+    {
+        "title": "Qbittorrent",
+        "link": "qbittorrent.ccorso.ca",
+        "description": "A web UI for  ",
+        "imageSource": "qbittorrenticon.png"
     }
 
 ]

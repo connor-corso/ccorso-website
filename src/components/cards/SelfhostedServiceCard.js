@@ -1,9 +1,6 @@
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
-import Box from '@mui/material/Box';
-import Link from '@mui/material/Link';
 import Container from '@mui/material/Container';
-import {Link as ExternalLink } from 'react-router-dom';
 
 function Service({service}){
     return (
