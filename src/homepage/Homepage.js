@@ -15,7 +15,7 @@ function Homepage(){
         </Grid>
 
         <Grid item xs={12} md={6}>
-            <SelfhostedServices />
+            <SelfhostedServices multiplier={2}/>
         </Grid>
       </Grid>
   ) 
