@@ -1,0 +1,39 @@
+
+[
+    {
+        "id":"3",
+        "title": "Remodelling My Website",
+        "sections": 
+        [
+            {
+                "title": "Introduction",
+                "text": "After graduating Trent with a CS degree I have been slowly poking away at my website trying to polish it up. Originally I had a little site written up in PHP with some basic CSS styling however I got bored pretty quickly and gave up. This write up talks about my experience redoing my website with React using Material UI to make it nice and pretty",
+                "images":
+                [
+                    {
+                        "imageLocation": "screenshot_old_puke_green_website.png",
+                        "imageAlternateText": "picture of my old gross website",
+                        "imageWidth": "30%"
+                    }
+                ]
+            },
+            {
+                "title": "End Goal",
+                "text": "I would like my website to have four pages, a home page, a projects page, a selfhosted services page, and a guide page for selfhosting services. The home page could have a preamble talking about me and then I would like to have it have a sample of each subpage displayed on it. I am going to start with the projects page as that is the page that I have the most content for and that I think will allow me to show what I have been working on. Then I will implement a home page that has the projects page displayed on it multiple times that will be slowly replaced when I finish the selfhosted services and guide pages complete."
+            },
+            {
+                "title": "Implementation Details",
+                "text": "Currently the projects page will get all of its data from a json file that contains an array of projects. Each project will have multiple sections in it that contain a section title, section text and then an  array of images that contains the image location as well as alternate text and image width properties. The website is in a GitHub repo and upon pushing changes GitHub Actions will automatically go out and build a container of the latest changes and push that container to Docker Hub. This updated container is picked up by Watchtower and the container is automatically updated on my server. This way all that I have to worry about is making the website and the deployment is taken care of automatically."
+            },
+            {
+                "title": "Problems Discovered Along The Way",
+                "text": "I wanted to keep my old website up while I worked on this new website, with the new website being accessible via www.ccorso.ca/projects and any other path going to the old website. This worked however the new website had nothing to serve at /projects and so it just returned an error. To get around this I made the website accessible at website.ccorso.ca and worked towards a proper solution using react-router-dom and setting a custom nginx.conf that had the line \"try_files $uri /index.html;\" in it that would default to /index.html whenever the path was not known to nginx."
+            },
+            {
+                "title": "Key Lessons Learned",
+                "text": "I don't have any key lessons learned as of yet because I'm still working on it in the early stages"
+
+            }
+        ]
+    }
+]

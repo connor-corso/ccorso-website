@@ -10,5 +10,9 @@
     {
         "title":"Selfhosted Services",
         "url":"selfhosted"
+    },
+    {
+        "title":"Guides",
+        "url":"guides"
     }
 ]

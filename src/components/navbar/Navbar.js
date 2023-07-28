@@ -2,7 +2,7 @@ import Link from '@mui/material/Link';
 import Toolbar from '@mui/material/Toolbar';
 import Box from '@mui/material/Box';
 import CardMedia from  '@mui/material/CardMedia';
-import section from 'data/sections.json';
+import pages from 'data/pages.json';
 
 
 // The Navbar will have a banner
@@ -21,16 +21,16 @@ function Navbar(){
                 variant="dense"
                 sx={{ justifyContent: 'center', overflowX: 'auto' }}
             >
-                {section.map((section) =>(
+                {pages.map((page) =>(
                     <Link
                         color="inherit"
                         noWrap
-                        key={section.title}
+                        key={page.title}
                         variant="body2"
-                        href={section.url}
+                        href={page.url}
                         sx={{p:2, flexShrink: 0}}
                     >
-                        {section.title}
+                        {page.title}
                     </Link>
                 ))}
 
