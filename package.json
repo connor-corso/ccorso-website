@@ -15,7 +15,8 @@
     "react": "latest",
     "react-dom": "latest",
     "react-router-dom": "^6.14.1",
-    "react-scripts": "latest"
+    "react-scripts": "latest",
+    "react-syntax-highlighter": "^15.5.0"
   },
   "browserslist": {
     "production": [

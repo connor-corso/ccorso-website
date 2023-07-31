@@ -1,38 +1,47 @@
 
 [
     {
-        "id":"3",
-        "title": "Remodelling My Website",
+        "id":"2",
+        "title": "Dockerizing a Python app",
+        "sections":
+        [
+            {
+                "title":"Setting up a new folder",
+                "text": "Pop into a bash shell in the new folder, then you will want to run the commands below, make sure to install the pip packages that you want",
+                "code":
+                {   
+                    "code":"cd /path/to/python app \npython3 -m venv .venv\nsource .venv/bin/activate\npython3 -m pip install **MODULES YOU WANT**\npython3 -m pip freeze > requirements.txt",
+                    "language":"bash"
+                }
+            },
+            {
+                "title":"Creating the Dockerfile",
+                "text": "Make sure to pay attention to the versions of the base containers and the CMD, each argument that would normally be separated by a space in a bash command should be in their own quotes",
+                "code":
+                {   
+                    "code":"# syntax=docker/dockerfile:1\nFROM python:3.8-slim-buster\n\nWORKDIR /app\n\nCOPY requirements.txt requirements.txt\nRUN pip3 install -r requirements.txt\n\nCOPY . .\n\nCMD [\"python3\", \"-m\" , \"flask\", \"run\", \"--host=0.0.0.0\"]",
+                    "language":"docker"
+                }
+            },
+            {
+                "title":"Building and running the container",
+                "text": "Simply run this command with whatever tag you want to use, then run the run command to start the container. Running this container won't publish any ports or anything but it should allow you to test to see if the container at least starts up. Additional arguments can be supplied, or you can use docker-compose to make it nice and tidy",
+                "code":
+                {   
+                    "code":"docker build --tag python-docker .\ndocker run python-docker",
+                    "language":"bash"
+                }
+            }
+        ]
+    },
+    {
+        "id":"1",
+        "title": "Setting Up Traefik to serve as a reverse proxy",
         "sections": 
         [
             {
                 "title": "Introduction",
-                "text": "After graduating Trent with a CS degree I have been slowly poking away at my website trying to polish it up. Originally I had a little site written up in PHP with some basic CSS styling however I got bored pretty quickly and gave up. This write up talks about my experience redoing my website with React using Material UI to make it nice and pretty",
-                "images":
-                [
-                    {
-                        "imageLocation": "screenshot_old_puke_green_website.png",
-                        "imageAlternateText": "picture of my old gross website",
-                        "imageWidth": "30%"
-                    }
-                ]
-            },
-            {
-                "title": "End Goal",
-                "text": "I would like my website to have four pages, a home page, a projects page, a selfhosted services page, and a guide page for selfhosting services. The home page could have a preamble talking about me and then I would like to have it have a sample of each subpage displayed on it. I am going to start with the projects page as that is the page that I have the most content for and that I think will allow me to show what I have been working on. Then I will implement a home page that has the projects page displayed on it multiple times that will be slowly replaced when I finish the selfhosted services and guide pages complete."
-            },
-            {
-                "title": "Implementation Details",
-                "text": "Currently the projects page will get all of its data from a json file that contains an array of projects. Each project will have multiple sections in it that contain a section title, section text and then an  array of images that contains the image location as well as alternate text and image width properties. The website is in a GitHub repo and upon pushing changes GitHub Actions will automatically go out and build a container of the latest changes and push that container to Docker Hub. This updated container is picked up by Watchtower and the container is automatically updated on my server. This way all that I have to worry about is making the website and the deployment is taken care of automatically."
-            },
-            {
-                "title": "Problems Discovered Along The Way",
-                "text": "I wanted to keep my old website up while I worked on this new website, with the new website being accessible via www.ccorso.ca/projects and any other path going to the old website. This worked however the new website had nothing to serve at /projects and so it just returned an error. To get around this I made the website accessible at website.ccorso.ca and worked towards a proper solution using react-router-dom and setting a custom nginx.conf that had the line \"try_files $uri /index.html;\" in it that would default to /index.html whenever the path was not known to nginx."
-            },
-            {
-                "title": "Key Lessons Learned",
-                "text": "I don't have any key lessons learned as of yet because I'm still working on it in the early stages"
-
+                "text": "A reverse proxy is important as it allows you to automatically manage secure connections to apps. Traefik makes a great choice for a reverse proxy as it allows you to "
             }
         ]
     }
