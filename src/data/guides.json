@@ -31,6 +31,15 @@
                     "code":"docker build --tag python-docker .\ndocker run python-docker",
                     "language":"bash"
                 }
+            },
+            {
+                "title":"Setting Up Github Actions for CI",
+                "text": "You will want to create a workflow file like this, making sure to change the DOCKER_IMAGE_NAME, and set the DOCKER_HUB_USERNAME and DOCKER_HUB_ACCESS_TOKEN in your github secrets",
+                "code":
+                {   
+                    "code":"name: build_and_publish_container\n \non:\n  push:\n    branches: [ \"master\" ]\n\njobs:\n  build:\n    runs-on: ubuntu-latest\n    steps:\n      -\n        name: Checkout\n        uses: actions/checkout@v3\n      -\n        name: Login to Docker Hub\n        uses: docker/login-action@v2\n        with:\n          username: ${{ secrets.DOCKER_HUB_USERNAME }}\n          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}\n      -\n        name: Set up Docker Buildx\n        uses: docker/setup-buildx-action@v2\n      -\n        name: Build and push\n        uses: docker/build-push-action@v3\n        with:\n          context: .\n          file: ./Dockerfile\n          push: true\n          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/DOCKER_IMAGE_NAME:latest",
+                    "language":"yaml"
+                }
             }
         ]
     },
@@ -41,7 +50,7 @@
         [
             {
                 "title": "Introduction",
-                "text": "A reverse proxy is important as it allows you to automatically manage secure connections to apps. Traefik makes a great choice for a reverse proxy as it allows you to "
+                "text": "A reverse proxy is important as it allows you to automatically manage secure connections to apps. Traefik makes a great choice for a reverse proxy as integrates well with docker and can automatically pick up new containers and these containers provide their own rules. This allows you to set up traefik once and then never touch it again as all of the routing rules are set in the labels of containers"
             }
         ]
     }
