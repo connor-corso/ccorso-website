@@ -1,7 +1,7 @@
 
 [
     {
-        "id":"2",
+        "id":"1",
         "title": "Dockerizing a Python app",
         "sections":
         [
@@ -44,13 +44,33 @@
         ]
     },
     {
-        "id":"1",
-        "title": "Setting Up Traefik to serve as a reverse proxy",
+        "id":"2",
+        "title": "Setting Up Traefik, a reverse proxy",
         "sections": 
         [
             {
                 "title": "Introduction",
-                "text": "A reverse proxy is important as it allows you to automatically manage secure connections to apps. Traefik makes a great choice for a reverse proxy as integrates well with docker and can automatically pick up new containers and these containers provide their own rules. This allows you to set up traefik once and then never touch it again as all of the routing rules are set in the labels of containers"
+                "text": "A reverse proxy is important as it allows you to automatically manage secure connections to apps. Traefik makes a great choice for a reverse proxy as integrates well with docker and can automatically pick up new containers and these containers provide their own rules. This allows you to set up traefik once and then never touch it again as all of the routing rules are set in the labels of containers. I have found that Traefik is a very easy to use reverse proxy that is very capable and flexible"
+
+            },
+            {
+                "title": "Prerequisites",
+                "text": "You will need a compatible DNS provider, an up to date list can be found below. If you are using cloudflare like I am, you will need your api email, your api key, your dns api token and your zone api token. These will be stored in environment values in the docker compose file. With these api keys you are able to acquire dns verified certs, which will allow you to generate a wildcard certificate that you can use for all subdomains. This will let you create a wildcard dns record that sends all subdomains to the same host, saving you from having to add a new subdomain manually for each service.",
+                "links": [
+                    {
+                        "link": "https://doc.traefik.io/traefik/https/acme/#providers",
+                        "linkText": "List Of Providers"
+                    }
+                ]
+            },
+            {
+                "title": "The Compose file",
+                "text": "The compose file can be copied from the code section below, just make sure to change the example.com and other templates to suit your usage.",
+                "code": 
+                {
+                    "code": "\nversion: '3'\n\nservices:\n  traefik:\n    restart: unless-stopped\n    container_name: traefik\n    # The official v2 Traefik docker image\n    image: traefik:v2.9.9\n    command: \n    # Enables the web UI and tells Traefik to listen to docker\n    # this is insecure access to the control panel\n      #- \"--api.insecure=true\" \n\n\n      # this allows for us to proxy non docker things\n      - \"--providers.file.directory=/rules\"\n      - \"--providers.file.watch=true\"\n\n      - --serverstransport.insecureskipverify=true\n\n      \n      - \"--log=true\"\n      - \"--log.level=DEBUG\" # (Default: error) DEBUG, INFO, WARN, ERROR, FATAL, PANIC\n      - \"--accessLog=true\"\n      - \"--accessLog.filePath=/traefik.log\"\n      - \"--accessLog.bufferingSize=100\" # Configuring a buffer of 100 lines\n      - \"--accessLog.filters.statusCodes=400-499\"\n      - \"--providers.file.directory=/rules\" # Load dynamic configuration from one or more .toml or .yml files in a directory.. \n\n      - \"--providers.docker=true\"\n      - \"--providers.docker.exposedbydefault=false\"\n      - \"--entrypoints.web.address=:80\"\n      - \"--entrypoints.websecure.address=:443\"\n      - \"--certificatesresolvers.myresolver.acme.dnschallenge=true\"\n      - \"--certificatesresolvers.myresolver.acme.dnschallenge.provider=cloudflare\"\n      #comment below to stop using staging\n      - \"--certificatesresolvers.myresolver.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory\"\n      - \"--certificatesresolvers.myresolver.acme.email=example\"\n      - \"--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json\"\n      - \"--certificatesResolvers.myresolver.acme.dnsChallenge.resolvers=1.1.1.1:53,1.0.0.1:53\"\n    \n\n    environment:\n      - \"TZ=Canada/Eastern\"\n      - \"CF_API_EMAIL=email@example.com\"\n      - \"CF_API_KEY=example\"\n      - \"CF_DNS_API_TOKEN=example\"\n      - \"CF_ZONE_API_TOKEN=example\"\n    #restart: unless-stopped\n    \n    ports:\n      - target: 80\n        published: 80\n        protocol: tcp\n        mode: host\n      - target: 443\n        published: 443\n        protocol: tcp\n        mode: host\n\n    volumes:\n      - \"./rules:/rules\"\n      - \"./letsencrypt:/letsencrypt\"\n      - \"/var/run/docker.sock:/var/run/docker.sock\"\n\n\n    networks:\n      t2_proxy: \n        ipv4_address: 192.168.90.254 # this assigns traefik a static internal ip\n    labels:\n      - \"traefik.enable=true\"\n\n      \n      #http to https redirect\n      - \"traefik.http.routers.http-catchall.entrypoints=web\"\n      - \"traefik.http.routers.http-catchall.rule=HostRegexp(`{host:.+}`)\"\n      - \"traefik.http.routers.http-catchall.middlewares=redirect-to-https\"\n      - \"traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https\"\n\n      # HTTP Routers\n      - \"traefik.http.routers.traefik-rtr.entrypoints=websecure\"\n      - \"traefik.http.routers.traefik-rtr.rule=Host(`traefik.example.ca`)\"\n      - \"traefik.http.routers.traefik-rtr.tls=true\"\n      #- \"traefik.http.routers.traefik-rtr.tls.certresolver=myresolver\" # Comment out this line after first run of traefik to force the use of wildcard certs\n      - \"traefik.http.routers.traefik-rtr.tls.domains[0].main=example.ca\"\n      - \"traefik.http.routers.traefik-rtr.tls.domains[0].sans=*.example.ca\"\n      \n      ## Services - API\n      - \"traefik.http.routers.traefik-rtr.service=api@internal\"\n\n      ## Middlewares\n      #this one will invoke all of the others so that we dont need 3 lines per thing\n      - \"traefik.http.routers.traefik-rtr.middlewares=chain-basic-auth@file\" \n\n\n\n# a network that has each device on the subnet 192.168.90.0/24, meaning that I can pop in a docker container and set it to a specific internal IP address\n#this makes intra container communication easier as I can tell PHP that mariadb will always exist at x.x.x.x:3306\nnetworks:\n  t2_proxy: # the new one that we will use to assign static ip addresses to containers\n    name: t2_proxy\n    driver: bridge\n    ipam:\n      config:\n        - subnet: 192.168.90.0/24\n",
+                    "language": "yaml"
+                }
             }
         ]
     }

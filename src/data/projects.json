@@ -6,24 +6,11 @@
         "sections":
         [
             {
-                "title": "main",
+                "title": "",
                 "text": "Working with PWM and servo motors \nThis project has a servo motor connected to PB6, a switch connected to PA4 and a laser connected to pin PA2.\nThe device will read in the status of the pull up pin PA4 to see if the switch has been toggled, and then will start operation of the toy\nWhen the device is on, pin PA2 will be set and the laser turned on. Then the bigBounce method will be called, then the randomBounce method, and then the bigBounce method again before looping\nbigBounce takes no arguments and will first look at the value in the timer compare register to see where the servo is currently positioned, and then will start at the opposite end and slowly move across to the other side\nrandomBounce takes no arguments and will generate a random number between 0 and 14, and based on that number will call randomWobble with a different base position argument\nrandomWobble will take an base, an int and will then move in a quick back and forth motion around that base position"
             }
         ]
         
-    },
-    {
-        "id":"2",
-        "title": "Writing a Display Driver for a 1602 Display",
-        "link": "https://github.com/connor-corso/connor-16x2-display-with-custom-driver",
-
-        "sections":
-        [
-            {
-                "title": "Main",
-                "text": "This is a WIP, much like my website"
-            }
-        ]
     },
     {
         "id":"3",

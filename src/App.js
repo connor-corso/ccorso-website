@@ -16,7 +16,7 @@ import Guides from 'guides/Guides';
 export default function App() {
   return (
     <Router>
-      <div>
+      
         <Navbar />
         <Routes>
             
@@ -31,7 +31,7 @@ export default function App() {
           <Route path="*" element={<Navigate to="/" />} />
 
         </Routes>
-      </div>
+      
     </Router>
     
     
