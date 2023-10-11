@@ -1,5 +1,37 @@
-
 [
+    {
+        "id":"0",
+        "title": "CGCPhotos",
+        "sections": 
+        [
+            {
+                "title": "Introduction",
+                "text": "This is my biggest and most advanced project that I have worked on, I am starting to work on it as of October 10th. This project aims to be a custom build replacement for photoprism that has support for Google Motion Photos. To learn more about Google Motion Photos you'll have to check out my guide down below but in short they are little videos embedded into the same file asa picture that you take on a Google Pixel when you turn on \"Top Shot\". I have moved away from Google Photos for a few reasons and I have searched for a selfhosted alternative to use, I found and used photoprism for a while and I liked the person/animal classification AI sauce that it used however it lacked support for Motion Photos and so I thought that I would be able to build myself a fully featured alternative. This project description covers my work on this and will be updated as I work on this project"
+            },
+            {
+                "title": "Step 1",
+                "text": "Plan out the architecture of the project, for this I think that I will maybe draw some picturs of what will provide what, I plan to use a microservices approach I think is the correct term, where I will have multiple docker images running little parts of the whole thing that work together. I will have one container that runs the frontend, this will be on React with Material UI. The backend system that handles the pics will be running in Python with FastAPI, and it potentially will talk to another python process running FastAPI that is responsible for pulling out the motion photos and splitting it into the picture part and the video part. The splitter will be capable of using CPU transcoding since the videos are stored in .265 and I think that it makes the most sense to convert the videos when you pull them out of the pictures. I think that this makes sense because when clients go to look at them because most clients don't support .265 playback natively and waiting to transcode them until they are needed would result in a processing delay and additional programming work to figure out if a video has been transcoded and then if it hasn't, transcoding it then saving the transcoded video over the original so that I don't have to transcode it again."
+            },
+            {
+                "title": "Step 2",
+                "text": "Write out some skeleton code for the API, maybe get a basic implementation working with curl, test to see if I can get SQL up and going by copying what I did for my monitoring station which used a db and FastAPI"
+            },
+            {
+                "title": "Step 3",
+                "text": "Get an ugly but semi-functional frontend working to make testing the backend easier and so that I can get a feel for how I would like the good copy of the frontend to look like and what features it should have"
+            },
+            {
+                "title": "Step 4",
+                "text": "Fix all of the issues that the backend has, start to implement the motion photos splitting system, this could be implemented as a schedulable batch job"
+            },
+            {
+                "title": "Step 5",
+                "text": "Pretty up the frontend and see what needs to be done from here"
+            }
+            
+
+        ]
+    },
     {
         "id":"1",
         "title": "First STM32 Project",

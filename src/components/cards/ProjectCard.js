@@ -68,7 +68,7 @@ function ProjectSection({ section }) {
       <Typography variant="h6" component="h2" pb={1}>
         {section.title}
       </Typography>
-      <Typography variant="body" component="body" pb={2}>
+      <Typography variant="body" component="body" pb={2} sx={{whiteSpace: "pre-line"}}>
         {section.text}
       </Typography>
       <ProjectLinks links={section.links} />
