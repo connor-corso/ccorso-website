@@ -10,7 +10,15 @@
             },
             {
                 "title": "Step 1",
-                "text": "Plan out the architecture of the project, for this I think that I will maybe draw some picturs of what will provide what, I plan to use a microservices approach I think is the correct term, where I will have multiple docker images running little parts of the whole thing that work together. I will have one container that runs the frontend, this will be on React with Material UI. The backend system that handles the pics will be running in Python with FastAPI, and it potentially will talk to another python process running FastAPI that is responsible for pulling out the motion photos and splitting it into the picture part and the video part. The splitter will be capable of using CPU transcoding since the videos are stored in .265 and I think that it makes the most sense to convert the videos when you pull them out of the pictures. I think that this makes sense because when clients go to look at them because most clients don't support .265 playback natively and waiting to transcode them until they are needed would result in a processing delay and additional programming work to figure out if a video has been transcoded and then if it hasn't, transcoding it then saving the transcoded video over the original so that I don't have to transcode it again."
+                "text": "Plan out the architecture of the project, for this I think that I will maybe draw some picturs of what will provide what, I plan to use a microservices approach I think is the correct term, where I will have multiple docker images running little parts of the whole thing that work together. I will have one container that runs the frontend, this will be on React with Material UI. The backend system that handles the pics will be running in Python with FastAPI, and it potentially will talk to another python process running FastAPI that is responsible for pulling out the motion photos and splitting it into the picture part and the video part. The splitter will be capable of using CPU transcoding since the videos are stored in .265 and I think that it makes the most sense to convert the videos when you pull them out of the pictures. I think that this makes sense because when clients go to look at them because most clients don't support .265 playback natively and waiting to transcode them until they are needed would result in a processing delay and additional programming work to figure out if a video has been transcoded and then if it hasn't, transcoding it then saving the transcoded video over the original so that I don't have to transcode it again.",
+                "images":
+                [
+                    {
+                        "imageLocation": "screenshot_of_CGCPhotos.png",
+                        "imageAlternateText": "picture of a google draw architecture",
+                        "imageWidth": "70%"
+                    }
+                ]
             },
             {
                 "title": "Step 2",
