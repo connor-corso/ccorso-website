@@ -21,20 +21,32 @@
                 ]
             },
             {
-                "title": "Step 2",
-                "text": "Write out some skeleton code for the API, maybe get a basic implementation working with curl, test to see if I can get SQL up and going by copying what I did for my monitoring station which used a db and FastAPI"
+                "title": "",
+                "text": "Originally I was going to document my work as I went but that didn't really happen so now I am going back and covering what I all I did and why."
             },
             {
-                "title": "Step 3",
-                "text": "Get an ugly but semi-functional frontend working to make testing the backend easier and so that I can get a feel for how I would like the good copy of the frontend to look like and what features it should have"
+                "title": "Work on the backend system",
+                "text": "I had planned to make the backend system quite modular and I was going to have multiple programs that would talk to each other to handle different parts of the gallery system, I did not go through with this approach as I thought that would be overkill for this little app. Instead of having the backend system split across multiple programs, I tried to split it across different python files which I believe is a more correct approach. This allowed me to separate out all the different parts. The different parts were: database methods, api routes, the photo handling system, and the motion photo handling system."
             },
             {
-                "title": "Step 4",
-                "text": "Fix all of the issues that the backend has, start to implement the motion photos splitting system, this could be implemented as a schedulable batch job"
+                "title": "The database methods",
+                "text": "I wanted to use a database to store all of the records relating to each photo, I thought that this would be the easiest way to store these records and it's always good practice to play around with a database, the database has 3 tables, galleries, photos, and tags. There are also tables for photo_gallery and photo_tag associations so that we can have many to many relations. Currently galleries and tags are not implemented and there is no current plan for them to be supported. Each photo record in the database (aka a photo_info) contains a primary key: photo id, the original photo title, paths to the thumbnail, photo, and motion part. There are also flags such as favorite, motion photo. There are also some unused columns such as uploaded_at, processed, visibility, tags and galleries. \nYou can get access to these records in a few ways, you can get all photoinfos, you can get them paginated, and you can get a photo from an id. You can also add a photo and toggle whether a photo is a favorite or not."
             },
             {
-                "title": "Step 5",
-                "text": "Pretty up the frontend and see what needs to be done from here"
+                "title": "The api routes",
+                "text": "There is one way to add photos to the gallery currently and that is through posting one image to /add-photo/, you can also get a page of photo infos and you can request pages of varios sizes, or specifically only favorited images. You can also get a photo info from a photo's id, and you can get the thumbnail or motion photo using a photo id as well. There are also some reprocessing methods that allow you to reprocess an image although this will only regenerate a thumbnail, not the motion photo"
+            },
+            {
+                "title": "The photo handling system",
+                "text": "This is the meat of the system, it is responsible for taking the images from the api and processing them, storing them and then generating thumbnails and motion photos. The image handling system is also responsible to save the photo info records in the database."
+            },
+            {
+                "title": "The motion photo handling system",
+                "text": "The motion photo handling system is responsible for taking in an image, looking to see if it is a motion photo, splitting the file in two then transcoding the video from x265 to x264 so that devices can play it"
+            },
+            {
+                "title": "Dates Edited",
+                "text": "Created: Oct 2023, 2024\nEdited: Feb 24, 2024"
             }
             
 
@@ -42,12 +54,38 @@
     },
     {
         "id":"1",
-        "title": "First STM32 Project",
+        "title": "Working with the Pi Pico W in C on Fedora with VS Code",
         "sections":
         [
             {
-                "title": "",
-                "text": "Working with PWM and servo motors \nThis project has a servo motor connected to PB6, a switch connected to PA4 and a laser connected to pin PA2.\nThe device will read in the status of the pull up pin PA4 to see if the switch has been toggled, and then will start operation of the toy\nWhen the device is on, pin PA2 will be set and the laser turned on. Then the bigBounce method will be called, then the randomBounce method, and then the bigBounce method again before looping\nbigBounce takes no arguments and will first look at the value in the timer compare register to see where the servo is currently positioned, and then will start at the opposite end and slowly move across to the other side\nrandomBounce takes no arguments and will generate a random number between 0 and 14, and based on that number will call randomWobble with a different base position argument\nrandomWobble will take an base, an int and will then move in a quick back and forth motion around that base position"
+                "title": "Why bother?",
+                "text": "I have always enjoyed tinkering around with IOT devices and I have a RPI 3b that I have played with as well as some Arduinos. When I saw that the Raspberry Pi Foundation came out with a wireless pi pico for <$10 I was pretty excited. I have found that there is a lot of community support around raspberry pi devices and that they are generally built pretty well so I figured I would give them a try and I bought two. Initially I was using MicroPython on the pies but I found that I was relying on libraries and I didn't really know how the libraries were interfacing with devices on a lower level. I wanted to figure out how these libraries were doing the things that they were doing and I knew that C was a pretty low level language that I have been interested in learning so I figured I would switch to tinkering in C instead of Python."
+            },
+            {
+                "title": "Initial Troubles",
+                "text": "This turned out to be a fair bit trickier than programming in Python for a couple reasons. Firstly since I am on Fedora and not programming from a Pi 3/4/5 or a debian based system I couldn't use their installer script to set everything up for me. This also meant that I had to translate apt packages to dnf packages which I did with the help of Chat GPT which is surprisingly really good at that. Another issue that I had was setting up VS Code to play nice with the code completion and error checking as it had troubles finding the libraries and then using the correct compiler. The solution to this was to create a .vscode folder in the project directory and create three files, c_cpp_properties.json, settings.json and launch.json. These files specify that vscode's c_cpp debugger should use libraries found at /home/connor/pico/pico-sdk so that I stopped getting the import errors and could use autocomplete and function parameter hints. It also specifies which compiler to use and the C/C++ standards to check against. The settings.json file tells the C_CPP extension that it should get configuration information from the cmake tools extension which will provide project specific information such as any linked libraries. launch.json sets up the building and debugging menu in vscode and specifies how to build the executable and then how to use openocd to connect to the pi through a raspberry pi debug probe.",
+
+                "code":
+                {
+                    "code": "settings.json:\n{\n    \"C_Cpp.default.configurationProvider\": \"ms-vscode.cmake-tools\"\n}\n\nc_cpp_properties.json:\n{\n    \"configurations\": [\n        {\n            \"name\": \"Linux\",\n            \"includePath\": [\n                \"${default}\",\n                \"/home/connor/pico/pico-sdk/src/common/pico_stdlib/include\",\n                \"/home/connor/pico/pico-sdk/**\",\n                \"/home/connor/pico/pico-sdk/src/common/pico_base/include\"\n            ],\n            \"defines\": [],\n            \"compilerPath\": \"/usr/bin/arm-none-eabi-gcc\",\n            \"cStandard\": \"c11\",\n            \"cppStandard\": \"c++17\"\n        }\n    ],\n    \"version\": 4\n}\n\nlaunch.json:\n{\n    \"version\": \"0.2.0\",\n    \"configurations\": [\n        {\n            \"name\": \"Pico Debug\",\n            \"cwd\": \"${workspaceRoot}\",\n            \"executable\": \"${command:cmake.launchTargetPath}\",\n            \"request\": \"launch\",\n            \"type\": \"cortex-debug\",\n            \"servertype\": \"openocd\",\n            \"gdbPath\": \"gdb\",\n            \"device\": \"RP2040\",\n            \"configFiles\": [\n                \"interface/cmsis-dap.cfg\",\n                \"target/rp2040.cfg\"\n            ],\n            \"svdFile\": \"${env:PICO_SDK_PATH}/src/rp2040/hardware_regs/rp2040.svd\",\n            \"runToEntryPoint\": \"true\",\n            // Work around for stopping at main on restart\n            \"postRestartCommands\": [\n                \"break main\",\n                \"continue\"\n            ]\n        }\n    ]\n}",
+                    "language": "json"
+                }
+            },
+            {
+                "title": "What now?",
+                "text": "Now I am following along with Harry Fairhead's Programming the Pi Pico In C vol 2 book. I am working through all of the chapters and following along with the examples. This will give me some insight into what I can get my pies doing for me where my first big project is going to be some sort of a monitoring system that records and displays a bunch of sensor data from my house.",
+                "images":
+                [
+                    {
+                        "imageLocation": "picture_of_pi_pico_debug_setup.png",
+                        "imageAlternateText": "A picture of my pi pico debug setup", 
+                        "imageWidth": "30%"
+                    }
+                ]
+            },
+            {
+                "title": "Dates Edited",
+                "text": "Created: Feb 24th, 2024\nEdited: Feb 24th, 2024"
             }
         ]
         
@@ -83,8 +121,12 @@
             },
             {
                 "title": "Key Lessons Learned",
-                "text": "I don't have any key lessons learned as of yet because I'm still working on it in the early stages"
+                "text": "I think that I should migrate to a dynamic backend system at some point so that I don't have to come back and edit json files manually to create and edit project/guide entries. I have also considered moving to some ready made software that manages the website but I think that for now I will stick to the self made tool because I can make it work, I understand how it works and if I need new functionality I can just go in myself and add it pretty easily. Another thing that I think that I should have done is setup a dates section for each entry so that I can look back on what I've done and see how far I've come."
 
+            },
+            {
+                "title": "Dates Edited",
+                "text": "Created: June 2023, \nEdited: June 2023, July 2023, Feb 24th, 2024"
             }
         ]
     },
@@ -126,8 +168,48 @@
                         "link": "https://github.com/connor-corso/motion-photos-extraction-backend"
                     }
                 ]
+            },
+            {
+                "title": "Dates Edited",
+                "text": "Created: June, 2023\nEdited: Feb 24th, 2024"
             }
 
         ]
+    },
+    {
+        "id":"6",
+        "title": "Some VS Code shortcuts that I always forget",
+        "sections":
+        [
+            {
+                "title": "Shortcuts",
+                "text": "format document: ctrl + shift + i\ntoggle word wrap: alt + z\ntoggle line comments: ctrl + /\nopen folder ctrl + k then ctrl + o"
+            },
+            {
+                "title": "Dates Edited",
+                "text": "Created: Feb 24, 2024\nEdited: Feb 24th, 2024"
+            }
+        ]
+        
+    },
+    {
+        "id":"10",
+        "title": "First STM32 Project",
+        "sections":
+        [
+            {
+                "title": "Why do I still have this entry?",
+                "text": "I kept this entry from "
+            },
+            {
+                "title": "",
+                "text": "Working with PWM and servo motors \nThis project has a servo motor connected to PB6, a switch connected to PA4 and a laser connected to pin PA2.\nThe device will read in the status of the pull up pin PA4 to see if the switch has been toggled, and then will start operation of the toy\nWhen the device is on, pin PA2 will be set and the laser turned on. Then the bigBounce method will be called, then the randomBounce method, and then the bigBounce method again before looping\nbigBounce takes no arguments and will first look at the value in the timer compare register to see where the servo is currently positioned, and then will start at the opposite end and slowly move across to the other side\nrandomBounce takes no arguments and will generate a random number between 0 and 14, and based on that number will call randomWobble with a different base position argument\nrandomWobble will take an base, an int and will then move in a quick back and forth motion around that base position"
+            },
+            {
+                "title": "Dates Edited",
+                "text": "Created: June 2023\nEdited: Feb 24th, 2024"
+            }
+        ]
+        
     }
 ]
